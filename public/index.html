@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pionni del Alevtonni — Ручные итальянские пионы для интерьера</title>
+  <meta name="description" content="Итальянская душа в вашем интерьере: скульптурные пионы ручной работы из премиальных итальянских материалов для офисов, бутиков и резиденций." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&subset=cyrillic,latin&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; background: #010101; color: #fff; }
+    body { font-family: 'Inter', sans-serif; background: transparent; color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+
+    #scroll-video-container {
+      position: fixed; inset: 0; z-index: 0;
+      background: #0a0a0a; top: -20%;
+    }
+    #scroll-video-container canvas,
+    #scroll-video-container video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    #scroll-video-container .overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.28); }
+
+    #particles-canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 3;
+    }
+
+    #hero {
+      position: relative; height: 100vh; width: 100%; display: flex; flex-direction: column;
+    }
+    #hero .gradient-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.18), transparent);
+      pointer-events: none;
+    }
+    #hero h1 {
+      font-size: clamp(1.85rem, 4.8vw, 3.75rem);
+      font-weight: 600;
+      line-height: 1.15;
+      max-width: 52rem;
+      text-wrap: balance;
+    }
+    #hero h1 .underlined { position: relative; display: inline-block; }
+    #hero h1 .underlined .line {
+      position: absolute; bottom: 0.25rem; left: 0; width: 100%; height: 10px;
+      background: #2C5C88; border-radius: 2px;
+    }
+    #hero h1 .underlined span { position: relative; }
+
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25%); }
+    }
+    .bounce-arrow-anim { animation: bounceArrow 1.2s ease-in-out infinite; }
+
+    #fixed-cards {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 4;
+      padding: 4.5rem 2.5rem 2.25rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.55), transparent);
+      opacity: 0; pointer-events: none;
+    }
+
+    #section-three .inner {
+      opacity: 0; transform: translateY(32px); filter: blur(8px);
+      transition: opacity 1s ease-out, transform 1s ease-out, filter 1s ease-out;
+    }
+    #section-three .inner.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .bounce-arrow-anim { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Video Background -->
+  <div id="scroll-video-container" aria-hidden="true">
+    <canvas id="video-canvas"></canvas>
+    <video id="video-fallback" muted playsinline preload="auto" crossorigin="anonymous"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260616_212935_bbf608da-62d1-4f25-9be4-c346e4d09cc8.mp4"
+    ></video>
+    <div class="overlay"></div>
+  </div>
+
+  <!-- Particles -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Fixed Cards Reveal -->
+  <div id="fixed-cards">
+    <div id="fixed-cards-grid" class="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-10">
+      <div class="card">
+        <h3 class="mb-3 text-xl font-bold text-white sm:text-2xl">01. Скульптурная лепка</h3>
+        <p class="text-sm leading-relaxed text-neutral-300">Каждый пион формуется вручную итальянскими мастерами: десятки шелковистых лепестков передают живую пластику, утренний изгиб и глубину раскрытого бутона.</p>
+      </div>
+      <div class="card">
+        <h3 class="mb-3 text-xl font-bold text-white sm:text-2xl">02. Итальянский материал</h3>
+        <p class="text-sm leading-relaxed text-neutral-300">Запатентованный софт-тач из Ломбардии неотличим на ощупь от живого цветка, не выгорает под витринными софитами и сохраняет архитектуру формы десятилетиями.</p>
+      </div>
+      <div class="card">
+        <h3 class="mb-3 text-xl font-bold text-white sm:text-2xl">03. Статус для бизнеса</h3>
+        <p class="text-sm leading-relaxed text-neutral-300">От строгих офисных переговорных до модных бутиков — крупные пионы мгновенно задают атмосферу европейского салона и притягивают взгляды гостей.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-black/45 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-4 sm:px-10">
+      <a href="#hero" class="shrink-0 whitespace-nowrap text-lg font-bold tracking-tight text-white sm:text-xl">Pionni del Alevtonni</a>
+
+      <nav aria-label="Основная навигация" class="hidden items-center gap-7 md:flex">
+        <a href="#catalog" class="shrink-0 whitespace-nowrap text-sm text-neutral-300 transition-colors hover:text-white">Коллекции</a>
+        <a href="#metrics" class="shrink-0 whitespace-nowrap text-sm text-neutral-300 transition-colors hover:text-white">Мастерство</a>
+        <a href="#reviews" class="shrink-0 whitespace-nowrap text-sm text-neutral-300 transition-colors hover:text-white">Отзывы</a>
+        <a href="#contact" class="shrink-0 whitespace-nowrap text-sm text-neutral-300 transition-colors hover:text-white">Контакты</a>
+      </nav>
+
+      <div class="flex shrink-0 items-center gap-4">
+        <a href="tel:+37378585585" aria-label="Позвонить по номеру +373 785 85 585" class="hidden items-center gap-2 whitespace-nowrap text-sm font-medium text-neutral-200 tabular-nums transition-colors hover:text-white lg:inline-flex">
+          <i data-lucide="phone" class="h-4 w-4 text-[#5b9bd5]"></i>
+          <span>+373 785 85 585</span>
+        </a>
+        <button type="button" onclick="openOrderModal('Индивидуальный подбор')" class="hidden shrink-0 whitespace-nowrap rounded-lg bg-[#2C5C88] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#3a7aad] sm:inline-flex">
+          Заказать
+        </button>
+        <button type="button" id="mobile-menu-btn" aria-label="Открыть меню" class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white md:hidden">
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-drawer" class="hidden border-t border-white/10 bg-[#050505]/95 px-6 py-5 backdrop-blur-xl md:hidden">
+      <nav class="flex flex-col gap-4">
+        <a href="#catalog" class="mobile-nav-link text-base text-neutral-200">Коллекции</a>
+        <a href="#metrics" class="mobile-nav-link text-base text-neutral-200">Мастерство</a>
+        <a href="#reviews" class="mobile-nav-link text-base text-neutral-200">Отзывы</a>
+        <a href="#contact" class="mobile-nav-link text-base text-neutral-200">Контакты</a>
+        <a href="tel:+37378585585" class="mt-2 inline-flex items-center gap-2 text-base font-medium text-[#7ab3e6] tabular-nums">
+          <i data-lucide="phone" class="h-4 w-4"></i>
+          <span>+373 785 85 585</span>
+        </a>
+        <button type="button" onclick="openOrderModal('Индивидуальный подбор')" class="mt-1 inline-flex w-full items-center justify-center rounded-lg bg-[#2C5C88] px-4 py-3 text-sm font-medium text-white">
+          Заказать композицию
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="content" class="relative z-[2]">
+    <!-- Section 1: Hero -->
+    <section id="hero">
+      <div class="gradient-overlay"></div>
+      <div class="content relative z-10 flex flex-1 flex-col items-center justify-end px-6 pb-20 text-center sm:pb-24">
+        <p class="subtitle mb-4 text-xs tracking-[0.14em] text-neutral-300 uppercase sm:text-sm">Ручные пионы из Италии</p>
+        <h1>
+          Итальянская душа в
+          <span class="underlined"><span class="line"></span><span>вашем интерьере</span></span>
+        </h1>
+        <div class="ctas mt-10 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row">
+          <a href="tel:+37378585585" class="flex items-center gap-2.5 rounded-lg border border-gray-700/60 bg-[#1a1a1a]/90 px-7 py-3.5 text-sm text-gray-200 backdrop-blur-sm transition-colors hover:border-[#2C5C88] hover:text-white">
+            <span class="font-mono text-sm text-[#5b9bd5]">&gt;</span>
+            <span class="font-mono tabular-nums">+373 785 85 585</span>
+          </a>
+          <a href="#catalog" class="inline-flex items-center gap-2 rounded-lg bg-[#2C5C88] px-8 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[#3a7aad]">
+            <span>Подобрать коллекцию</span>
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </a>
+        </div>
+      </div>
+      <a href="#cards-trigger" aria-label="Прокрутить вниз" class="relative z-10 flex justify-center pb-8">
+        <i data-lucide="chevron-down" class="bounce-arrow-anim h-6 w-6 text-neutral-400"></i>
+      </a>
+    </section>
+
+    <div style="height:150vh;" aria-hidden="true"></div>
+    <div id="cards-trigger" style="height:200vh;" aria-hidden="true"></div>
+    <div style="height:100vh;" aria-hidden="true"></div>
+
+    <!-- Section 3 -->
+    <section id="section-three" class="relative flex min-h-screen items-end justify-center px-6 pb-20 sm:px-10 sm:pb-32">
+      <div class="inner relative z-10 flex flex-col items-center text-center" id="section-three-inner">
+        <p class="mb-3 text-base text-neutral-300">Ателье интерьерной ботаники</p>
+        <h2 class="font-bold tracking-tight text-white" style="font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.08;">Pionni del Alevtonni</h2>
+      </div>
+    </section>
+
+    <!-- Studio Sections Continuation -->
+    <div class="relative z-10 border-t border-white/[0.08] bg-[#010101]/90 backdrop-blur-md">
+      <!-- Section 4: Catalog -->
+      <section id="catalog" class="mx-auto max-w-6xl px-6 py-24 sm:px-10 sm:py-32">
+        <div class="flex flex-col justify-between gap-8 border-b border-white/10 pb-10 lg:flex-row lg:items-end">
+          <div class="max-w-2xl">
+            <p class="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">Витрина коллекций</p>
+            <h2 class="font-semibold tracking-tight text-white" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15;">Скульптурные композиции для офисов, бутиков и резиденций</h2>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] p-1" role="tablist">
+            <button type="button" data-filter="all" class="filter-tab rounded-md bg-[#2C5C88] px-3.5 py-2 text-xs font-medium text-white sm:text-sm">Все коллекции</button>
+            <button type="button" data-filter="boutique" class="filter-tab rounded-md px-3.5 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white sm:text-sm">Для бутиков</button>
+            <button type="button" data-filter="office" class="filter-tab rounded-md px-3.5 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white sm:text-sm">Для офисов</button>
+            <button type="button" data-filter="residence" class="filter-tab rounded-md px-3.5 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white sm:text-sm">Для резиденций</button>
+          </div>
+        </div>
+
+        <div id="catalog-grid" class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2"></div>
+      </section>
+
+      <!-- Section 5: Metrics -->
+      <section id="metrics" class="border-t border-white/[0.08] bg-white/[0.015] px-6 py-24 sm:px-10 sm:py-28">
+        <div class="mx-auto max-w-6xl">
+          <div class="mb-14 max-w-2xl">
+            <p class="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">Преимущества в цифрах</p>
+            <h2 class="font-semibold tracking-tight text-white" style="font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.18;">Математика долговечного премиум-декора</h2>
+          </div>
+          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="border-t border-white/15 pt-6">
+              <div class="text-4xl font-bold tracking-tight text-white tabular-nums sm:text-5xl">140+</div>
+              <h3 class="mt-4 text-base font-semibold text-white">Лепестков ручной формовки</h3>
+              <p class="mt-2 text-sm leading-relaxed text-neutral-400">Каждый крупный бутон собирается из десятков индивидуально вырезанных и тонированных лепестков.</p>
+            </div>
+            <div class="border-t border-white/15 pt-6">
+              <div class="text-4xl font-bold tracking-tight text-white tabular-nums sm:text-5xl">12 лет</div>
+              <h3 class="mt-4 text-base font-semibold text-white">Стойкости оттенка</h3>
+              <p class="mt-2 text-sm leading-relaxed text-neutral-400">Итальянский светостойкий пигмент сохраняет глубину цвета под витринными софитами и солнцем.</p>
+            </div>
+            <div class="border-t border-white/15 pt-6">
+              <div class="text-4xl font-bold tracking-tight text-white tabular-nums sm:text-5xl">18 ч</div>
+              <h3 class="mt-4 text-base font-semibold text-white">Работы мастера на сет</h3>
+              <p class="mt-2 text-sm leading-relaxed text-neutral-400">Кропотливая скульптурная пластика стеблей и калибровка бутонов под пропорции вашего помещения.</p>
+            </div>
+            <div class="border-t border-white/15 pt-6">
+              <div class="text-4xl font-bold tracking-tight text-white tabular-nums sm:text-5xl">0 €</div>
+              <h3 class="mt-4 text-base font-semibold text-white">Затрат на уход и замену</h3>
+              <p class="mt-2 text-sm leading-relaxed text-neutral-400">Никакого полива, осыпающихся лепестков и еженедельных счетов флористическим службам.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Reviews -->
+      <section id="reviews" class="mx-auto max-w-6xl border-t border-white/[0.08] px-6 py-24 sm:px-10 sm:py-32">
+        <div class="mb-14 max-w-2xl">
+          <p class="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">Отзывы клиентов</p>
+          <h2 class="font-semibold tracking-tight text-white" style="font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.18;">Впечатление, которое работает на ваш бренд каждый день</h2>
+        </div>
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <blockquote class="flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.025] p-7 sm:p-8">
+            <p class="text-sm leading-relaxed text-neutral-200 sm:text-base">«После установки композиции Nero di Milano в центре зала клиенты стали чаще фотографировать витрину и задерживаться у примерочных. За восемь месяцев цветы не потеряли ни свежести формы, ни матового сияния.»</p>
+            <footer class="mt-8 border-t border-white/10 pt-5">
+              <div class="font-semibold text-white">Валерия Морозова</div>
+              <div class="mt-1 text-xs text-neutral-400">Управляющая концепт-стора Atelier Nove</div>
+              <div class="mt-2 text-xs text-[#7ab3e6]">Бутик женской одежды · Композиция 95 см</div>
+            </footer>
+          </blockquote>
+          <blockquote class="flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.025] p-7 sm:p-8">
+            <p class="text-sm leading-relaxed text-neutral-200 sm:text-base">«Живые букеты на ресепшн архитектурного бюро требовали замены каждые четыре дня. Итальянские пионы Aeterna Velluto выглядят настолько живо, что партнёры при встрече наклоняются, чтобы ощутить аромат.»</p>
+            <footer class="mt-8 border-t border-white/10 pt-5">
+              <div class="font-semibold text-white">Андрей Кравченко</div>
+              <div class="mt-1 text-xs text-neutral-400">Управляющий партнёр K-Arch Studio</div>
+              <div class="mt-2 text-xs text-[#7ab3e6]">Офис и переговорная · Экономия до € 3 200 в год</div>
+            </footer>
+          </blockquote>
+          <blockquote class="flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.025] p-7 sm:p-8">
+            <p class="text-sm leading-relaxed text-neutral-200 sm:text-base">«Для лобби-бара нам требовался акцент, устойчивый к круглосуточному кондиционированию и тёплому вечернему свету. Palazzo Grand стал визуальным якорем интерьера с первого дня.»</p>
+            <footer class="mt-8 border-t border-white/10 pt-5">
+              <div class="font-semibold text-white">Елена Руссу</div>
+              <div class="mt-1 text-xs text-neutral-400">Директор по интерьерам Grand Lounge</div>
+              <div class="mt-2 text-xs text-[#7ab3e6]">Гостиничный холл · Индивидуальная высота 135 см</div>
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Section 7: Contacts & Form -->
+      <section id="contact" class="border-t border-white/[0.08] bg-white/[0.015] px-6 py-24 sm:px-10 sm:py-32">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-14 lg:grid-cols-12 lg:items-start">
+          <div class="lg:col-span-5">
+            <p class="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">Прямая связь с ателье</p>
+            <h2 class="font-semibold tracking-tight text-white" style="font-size: clamp(1.75rem, 3.2vw, 2.5rem); line-height: 1.15;">Создадим композицию под архитектуру вашего зала</h2>
+            <p class="mt-5 text-sm leading-relaxed text-neutral-300 sm:text-base">Подберём оттенок бутонов под палитру отделки, рассчитаем высоту кашпо для витрины или переговорной и организуем бережную доставку с профессиональной расстановкой.</p>
+            <div class="mt-10 border-t border-white/10 pt-8">
+              <div class="text-xs tracking-[0.12em] text-neutral-400 uppercase">Телефон для заказа и консультаций</div>
+              <a href="tel:+37378585585" class="mt-3 inline-flex items-center gap-3 text-2xl font-semibold text-white tabular-nums transition-colors hover:text-[#7ab3e6] sm:text-3xl">
+                <i data-lucide="phone" class="h-6 w-6 text-[#5b9bd5]"></i>
+                <span>+373 785 85 585</span>
+              </a>
+              <p class="mt-3 text-sm text-neutral-400">Ежедневно с 09:00 до 20:00 · Индивидуальный подбор по фото интерьера</p>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-white/10 bg-[#08090c] p-7 sm:p-10 lg:col-span-7">
+            <form id="contact-form" class="space-y-5" novalidate>
+              <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label for="contact-name" class="mb-2 block text-xs font-medium text-neutral-300">Ваше имя</label>
+                  <input id="contact-name" type="text" placeholder="Например, Елена" class="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-neutral-500 focus:border-[#5b9bd5] focus:outline-none" />
+                </div>
+                <div>
+                  <label for="contact-phone" class="mb-2 block text-xs font-medium text-neutral-300">Телефон</label>
+                  <input id="contact-phone" type="tel" placeholder="+373 785 85 585" class="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-neutral-500 tabular-nums focus:border-[#5b9bd5] focus:outline-none" />
+                </div>
+              </div>
+              <div>
+                <label for="contact-space" class="mb-2 block text-xs font-medium text-neutral-300">Тип пространства</label>
+                <select id="contact-space" class="w-full rounded-lg border border-white/15 bg-[#0f1116] px-4 py-3 text-sm text-white focus:border-[#5b9bd5] focus:outline-none">
+                  <option value="Офис / Ресепшн">Офис / Ресепшн</option>
+                  <option value="Бутик / Магазин">Бутик / Магазин</option>
+                  <option value="Отель / Ресторан">Отель / Ресторан</option>
+                  <option value="Частная резиденция">Частная резиденция</option>
+                </select>
+              </div>
+              <div>
+                <label for="contact-comment" class="mb-2 block text-xs font-medium text-neutral-300">Пожелания к оттенку и высоте</label>
+                <textarea id="contact-comment" rows="3" placeholder="Опишите интерьер, желаемую палитру или габариты зоны..." class="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-neutral-500 focus:border-[#5b9bd5] focus:outline-none"></textarea>
+              </div>
+              <p id="contact-error" class="hidden text-sm text-rose-400"></p>
+              <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#2C5C88] px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[#3a7aad]">
+                <span>Запросить подбор композиции</span>
+                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </button>
+            </form>
+            <div id="contact-success" class="hidden py-10 text-center">
+              <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#2C5C88]/25 text-[#7ab3e6]">
+                <i data-lucide="check" class="h-6 w-6"></i>
+              </div>
+              <h3 class="text-2xl font-semibold text-white">Заявка принята</h3>
+              <p id="contact-success-msg" class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-neutral-300"></p>
+              <button type="button" id="contact-reset-btn" class="mt-8 inline-flex items-center justify-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-neutral-200 hover:bg-white/5">Отправить ещё одну заявку</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-white/10 px-6 py-10 sm:px-10">
+        <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div>
+            <div class="text-base font-bold tracking-tight text-white">Pionni del Alevtonni</div>
+            <div class="mt-1 text-xs text-neutral-400">Ручные пионы из Италии для премиальных интерьеров · 2026</div>
+          </div>
+          <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-300">
+            <a href="#catalog" class="hover:text-white">Коллекции</a>
+            <a href="#metrics" class="hover:text-white">Мастерство</a>
+            <a href="#reviews" class="hover:text-white">Отзывы</a>
+            <a href="tel:+37378585585" class="inline-flex items-center gap-2 font-medium text-white tabular-nums hover:text-[#7ab3e6]">
+              <i data-lucide="phone" class="h-4 w-4 text-[#5b9bd5]"></i>
+              <span>+373 785 85 585</span>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Order Modal -->
+  <div id="order-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg rounded-xl border border-white/15 bg-[#090a0e] p-7 shadow-2xl sm:p-8">
+      <button type="button" id="modal-close-btn" aria-label="Закрыть окно заказа" class="absolute top-5 right-5 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-neutral-400 hover:bg-white/5 hover:text-white">
+        <i data-lucide="x" class="h-4 w-4"></i>
+      </button>
+      <div id="modal-form-wrap">
+        <p class="text-xs tracking-[0.12em] text-[#7ab3e6] uppercase">Персональный заказ</p>
+        <h3 id="modal-collection-title" class="mt-2 text-2xl font-semibold text-white">Индивидуальный подбор</h3>
+        <p class="mt-2 text-sm text-neutral-400">Оставьте контакты, либо позвоните напрямую по номеру <a href="tel:+37378585585" class="text-neutral-200 underline decoration-[#2C5C88] underline-offset-4 tabular-nums">+373 785 85 585</a>.</p>
+        <form id="modal-form" class="mt-6 space-y-4" novalidate>
+          <div>
+            <label for="modal-name" class="mb-1.5 block text-xs font-medium text-neutral-300">Ваше имя</label>
+            <input id="modal-name" type="text" placeholder="Ваше имя" class="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:border-[#5b9bd5] focus:outline-none" />
+          </div>
+          <div>
+            <label for="modal-phone" class="mb-1.5 block text-xs font-medium text-neutral-300">Номер телефона</label>
+            <input id="modal-phone" type="tel" placeholder="+373 785 85 585" class="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder-neutral-500 tabular-nums focus:border-[#5b9bd5] focus:outline-none" />
+          </div>
+          <p id="modal-error" class="hidden text-sm text-rose-400"></p>
+          <button type="submit" class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#2C5C88] px-6 py-3 text-sm font-medium text-white hover:bg-[#3a7aad]">
+            <span>Подтвердить заявку</span>
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </button>
+        </form>
+      </div>
+      <div id="modal-success" class="hidden py-6 text-center">
+        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#2C5C88]/25 text-[#7ab3e6]">
+          <i data-lucide="sparkles" class="h-6 w-6"></i>
+        </div>
+        <h3 id="modal-success-title" class="text-xl font-semibold text-white"></h3>
+        <p id="modal-success-msg" class="mt-3 text-sm leading-relaxed text-neutral-300"></p>
+        <button type="button" id="modal-done-btn" class="mt-6 inline-flex items-center justify-center rounded-lg bg-[#2C5C88] px-6 py-2.5 text-sm font-medium text-white hover:bg-[#3a7aad]">Вернуться на сайт</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      if (window.lucide) lucide.createIcons();
+
+      // ===================== LENIS SMOOTH SCROLL =====================
+      let lenis = null;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (window.Lenis && !prefersReducedMotion) {
+        lenis = new Lenis({
+          duration: 1.25,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          anchors: { offset: -80 }
+        });
+        if (window.ScrollTrigger) {
+          lenis.on('scroll', ScrollTrigger.update);
+        }
+        function lenisRaf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(lenisRaf);
+        }
+        requestAnimationFrame(lenisRaf);
+      }
+
+      // ===================== SCROLL VIDEO =====================
+      const VIDEO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260616_212935_bbf608da-62d1-4f25-9be4-c346e4d09cc8.mp4';
+      const canvas = document.getElementById('video-canvas');
+      const videoEl = document.getElementById('video-fallback');
+      const ctx = canvas.getContext('2d');
+      let frames = [];
+      let framesReady = false;
+      let lastFrameIndex = -1;
+      let videoSeeking = false;
+
+      function resizeCanvas() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const rect = canvas.getBoundingClientRect();
+        const w = Math.round(rect.width * dpr);
+        const h = Math.round(rect.height * dpr);
+        if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+        lastFrameIndex = -1;
+      }
+
+      async function extractFrames() {
+        try {
+          const response = await fetch(VIDEO_URL, { mode: 'cors' });
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          const video = document.createElement('video');
+          video.muted = true; video.playsInline = true; video.crossOrigin = 'anonymous'; video.preload = 'auto'; video.src = objectUrl;
+          await new Promise((resolve, reject) => {
+            video.onloadedmetadata = () => resolve();
+            video.onerror = () => reject();
+            setTimeout(() => reject(), 15000);
+          });
+          const scale = Math.min(1, 1280 / video.videoWidth);
+          const scaledWidth = Math.round(video.videoWidth * scale);
+          const scaledHeight = Math.round(video.videoHeight * scale);
+          const frameCount = Math.max(30, Math.min(120, Math.round(video.duration * 24)));
+          for (let i = 0; i < frameCount; i++) {
+            video.currentTime = (i / (frameCount - 1)) * (video.duration - 0.05);
+            await new Promise((resolve, reject) => {
+              const onSeeked = () => { video.removeEventListener('seeked', onSeeked); resolve(); };
+              video.addEventListener('seeked', onSeeked);
+              setTimeout(() => { video.removeEventListener('seeked', onSeeked); reject(); }, 3000);
+            });
+            const bitmap = await createImageBitmap(video, { resizeWidth: scaledWidth, resizeHeight: scaledHeight });
+            frames.push(bitmap);
+          }
+          if (frames.length > 0) {
+            const initialIdx = Math.round(getProgress() * (frames.length - 1));
+            lastFrameIndex = initialIdx;
+            if (frames[initialIdx]) drawFrame(frames[initialIdx]);
+            framesReady = true;
+            canvas.style.visibility = 'visible';
+            videoEl.style.display = 'none';
+          }
+          URL.revokeObjectURL(objectUrl);
+        } catch(e) {}
+      }
+
+      function getScrollBounds() {
+        const vh = window.innerHeight;
+        const s3 = document.getElementById('section-three');
+        const end = s3 ? (s3.offsetTop + s3.offsetHeight) : (document.documentElement.scrollHeight - vh);
+        return { start: vh * 0.35, end: Math.max(vh * 1.5, end) };
+      }
+
+      function getProgress() {
+        const { start, end } = getScrollBounds();
+        const range = end - start;
+        if (range <= 0) return 0;
+        return Math.max(0, Math.min(1, (window.scrollY - start) / range));
+      }
+
+      function drawFrame(frame) {
+        const cw = canvas.width, ch = canvas.height;
+        const s = Math.max(cw / frame.width, ch / frame.height);
+        const dw = frame.width * s, dh = frame.height * s;
+        ctx.drawImage(frame, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+      }
+
+      function videoTick() {
+        const progress = getProgress();
+        if (framesReady && frames.length > 0) {
+          const idx = Math.round(progress * (frames.length - 1));
+          if (idx !== lastFrameIndex) {
+            lastFrameIndex = idx;
+            if (frames[idx]) drawFrame(frames[idx]);
+          }
+        } else if (videoEl.duration && isFinite(videoEl.duration) && videoEl.readyState >= 1) {
+          const target = Math.max(0.02, progress * videoEl.duration);
+          if (!videoSeeking && Math.abs(videoEl.currentTime - target) > 0.01) {
+            videoSeeking = true;
+            videoEl.currentTime = target;
+          }
+        }
+        requestAnimationFrame(videoTick);
+      }
+
+      videoEl.addEventListener('seeked', () => { videoSeeking = false; });
+      videoEl.addEventListener('stalled', () => { videoSeeking = false; });
+      videoEl.addEventListener('loadeddata', () => { videoEl.currentTime = 0.02; });
+      canvas.style.visibility = 'hidden';
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      requestAnimationFrame(videoTick);
+      extractFrames();
+
+      // ===================== PARTICLES =====================
+      const pCanvas = document.getElementById('particles-canvas');
+      const pCtx = pCanvas.getContext('2d');
+      let particles = [];
+      function resizeParticles() {
+        pCanvas.width = window.innerWidth;
+        pCanvas.height = window.innerHeight;
+        particles = [];
+        const count = Math.min(110, Math.floor((pCanvas.width * pCanvas.height) / 14000));
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * pCanvas.width,
+            y: Math.random() * pCanvas.height,
+            vx: (Math.random() - 0.5) * 0.28,
+            vy: (Math.random() - 0.5) * 0.28,
+            size: Math.random() * 1.5 + 0.5,
+            opacity: Math.random() * 0.55 + 0.18
+          });
+        }
+      }
+      function animateParticles() {
+        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+        for (const p of particles) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = pCanvas.width;
+          if (p.x > pCanvas.width) p.x = 0;
+          if (p.y < 0) p.y = pCanvas.height;
+          if (p.y > pCanvas.height) p.y = 0;
+          pCtx.beginPath();
+          pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          pCtx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+          pCtx.fill();
+        }
+        requestAnimationFrame(animateParticles);
+      }
+      resizeParticles();
+      window.addEventListener('resize', resizeParticles);
+      animateParticles();
+
+      // ===================== HERO FADE & FIXED CARDS =====================
+      window.addEventListener('scroll', () => {
+        const fade = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.3));
+        document.getElementById('hero').style.opacity = fade;
+      }, { passive: true });
+
+      const fixedCards = document.getElementById('fixed-cards');
+      const cardsGrid = document.getElementById('fixed-cards-grid');
+      function tickCards() {
+        const trigger = document.getElementById('cards-trigger');
+        const rect = trigger.getBoundingClientRect();
+        const triggerTop = rect.top + window.scrollY;
+        const triggerHeight = rect.height;
+        const scrollY = window.scrollY;
+        const vh = window.innerHeight;
+        const start = triggerTop - vh * 0.5;
+        const end = triggerTop + triggerHeight - vh * 0.3;
+        const range = end - start;
+        let progress = range > 0 ? (scrollY - start) / range : 0;
+        progress = Math.max(0, Math.min(1, progress));
+        const isActive = scrollY >= start - vh * 0.2 && scrollY <= end + vh * 0.3;
+        const fadeIn = Math.min(1, Math.max(0, (scrollY - (start - vh * 0.2)) / (vh * 0.2)));
+        const fadeOut = Math.min(1, Math.max(0, (end + vh * 0.3 - scrollY) / (vh * 0.3)));
+        const containerOpacity = isActive ? Math.min(fadeIn, fadeOut) : 0;
+        fixedCards.style.opacity = containerOpacity;
+        fixedCards.style.pointerEvents = containerOpacity > 0.1 ? 'auto' : 'none';
+        const isMobile = window.innerWidth < 768;
+        const revealPct = progress * 130;
+        const mask = isMobile
+          ? `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`
+          : `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
+        cardsGrid.style.maskImage = mask;
+        cardsGrid.style.webkitMaskImage = mask;
+        requestAnimationFrame(tickCards);
+      }
+      requestAnimationFrame(tickCards);
+
+      // ===================== SECTION 3 INTERSECTION =====================
+      const sectionThreeInner = document.getElementById('section-three-inner');
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          sectionThreeInner.classList.add('visible');
+          observer.unobserve(sectionThreeInner);
+        }
+      }, { threshold: 0.15 });
+      observer.observe(sectionThreeInner);
+
+      // ===================== GSAP STUDIO REVEAL =====================
+      if (window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('#metrics .grid > div', {
+          scrollTrigger: { trigger: '#metrics', start: 'top 80%', once: true },
+          y: 24, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out'
+        });
+      }
+
+      // ===================== CATALOG FILTER & RENDER =====================
+      const CATALOG = [
+        {
+          id: 'nero-di-milano', title: 'Nero di Milano', category: 'boutique',
+          categoryLabel: 'Бутики и шоурумы', specs: 'Высота 95 см · 11 бутонов · Итальянский софт-тач',
+          description: 'Пудровые и кремовые пионы в монолитном матовом кашпо из вулканического камня. Созданы для центральных подиумов и витрин концепт-сторов.',
+          price: '€ 890', image: './images/peony-boutique.jpg'
+        },
+        {
+          id: 'aeterna-velluto', title: 'Aeterna Velluto', category: 'office',
+          categoryLabel: 'Офисы и ресепшн', specs: 'Высота 78 см · 9 бутонов · Бархатный композит',
+          description: 'Контрастный ансамбль молочно-белых и глубоких винных пионов на стойку ресепшн или стол переговоров. Подчеркивает архитектурную строгость пространства.',
+          price: '€ 640', image: './images/peony-office.jpg'
+        },
+        {
+          id: 'palazzo-grand', title: 'Palazzo Grand', category: 'boutique',
+          categoryLabel: 'Бутики и отели', specs: 'Высота 135 см · 15 бутонов · Дымчатое стекло',
+          description: 'Масштабная вертикальная инсталляция оттенка шампань и пыльной розы в вазе ручной выдувки. Притягивает внимание в лаунж-зонах и холлах.',
+          price: '€ 1 450', image: './images/peony-lounge.jpg'
+        },
+        {
+          id: 'botanica-pura', title: 'Botanica Pura', category: 'residence',
+          categoryLabel: 'Частные резиденции', specs: 'Высота 65 см · 7 бутонов · Ручная тонировка',
+          description: 'Камерный букет с тончайшей ручной проработкой каждого лепестка и живой фактурой листа. Идеален для гостиных, кабинетов и приватных гардеробных.',
+          price: '€ 480', image: './images/peony-atelier.jpg'
+        }
+      ];
+
+      function renderCatalog(filter) {
+        const grid = document.getElementById('catalog-grid');
+        const list = filter === 'all' ? CATALOG : CATALOG.filter(i => i.category === filter);
+        grid.innerHTML = list.map(item => `
+          <article class="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.025] transition-colors hover:border-white/25">
+            <div class="relative aspect-[4/3] w-full overflow-hidden bg-[#0c0c0f]">
+              <img src="${item.image}" alt="${item.title}" referrerpolicy="no-referrer" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+            </div>
+            <div class="flex flex-1 flex-col justify-between p-7 sm:p-8">
+              <div>
+                <div class="mb-2 flex flex-wrap items-center gap-2 text-xs text-neutral-400">
+                  <span>${item.categoryLabel}</span>
+                  <span>·</span>
+                  <span>${item.specs}</span>
+                </div>
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="text-2xl font-semibold tracking-tight text-white">${item.title}</h3>
+                  <span class="shrink-0 text-xl font-semibold text-[#7ab3e6] tabular-nums">${item.price}</span>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-neutral-300">${item.description}</p>
+              </div>
+              <div class="mt-7 flex items-center justify-between border-t border-white/10 pt-5">
+                <span class="text-xs text-neutral-400">Индивидуальная адаптация палитры</span>
+                <button type="button" onclick="openOrderModal('${item.title}')" class="inline-flex items-center gap-2 rounded-lg bg-[#2C5C88] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#3a7aad]">
+                  <span>Заказать</span>
+                  <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        `).join('');
+        if (window.lucide) lucide.createIcons();
+      }
+      renderCatalog('all');
+
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-tab').forEach(b => {
+            b.classList.remove('bg-[#2C5C88]', 'text-white');
+            b.classList.add('text-neutral-300');
+          });
+          btn.classList.add('bg-[#2C5C88]', 'text-white');
+          btn.classList.remove('text-neutral-300');
+          renderCatalog(btn.dataset.filter);
+        });
+      });
+
+      // ===================== MOBILE MENU =====================
+      const drawer = document.getElementById('mobile-drawer');
+      document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+        drawer.classList.toggle('hidden');
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(a => {
+        a.addEventListener('click', () => drawer.classList.add('hidden'));
+      });
+
+      // ===================== MODAL & FORMS =====================
+      const modal = document.getElementById('order-modal');
+      let currentCollection = 'Индивидуальный подбор';
+      window.openOrderModal = function(title) {
+        currentCollection = title || 'Индивидуальный подбор';
+        document.getElementById('modal-collection-title').textContent = currentCollection;
+        document.getElementById('modal-form-wrap').classList.remove('hidden');
+        document.getElementById('modal-success').classList.add('hidden');
+        document.getElementById('modal-error').classList.add('hidden');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        if (lenis) lenis.stop();
+      };
+      function closeModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        if (lenis) lenis.start();
+      }
+      document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+      document.getElementById('modal-done-btn').addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+      document.getElementById('modal-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('modal-name').value.trim();
+        const phone = document.getElementById('modal-phone').value.trim();
+        const err = document.getElementById('modal-error');
+        if (!name) { err.textContent = 'Пожалуйста, укажите ваше имя.'; err.classList.remove('hidden'); return; }
+        if (phone.replace(/\D/g, '').length < 7) { err.textContent = 'Введите корректный номер телефона.'; err.classList.remove('hidden'); return; }
+        err.classList.add('hidden');
+        document.getElementById('modal-form-wrap').classList.add('hidden');
+        document.getElementById('modal-success-title').textContent = `Заказ на «${currentCollection}» оформлен`;
+        document.getElementById('modal-success-msg').textContent = `Наш флорист-декоратор позвонит вам на номер ${phone} для уточнения деталей вазы и времени доставки.`;
+        document.getElementById('modal-success').classList.remove('hidden');
+      });
+
+      const contactForm = document.getElementById('contact-form');
+      const contactSuccess = document.getElementById('contact-success');
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('contact-name').value.trim();
+        const phone = document.getElementById('contact-phone').value.trim();
+        const err = document.getElementById('contact-error');
+        if (!name) { err.textContent = 'Пожалуйста, укажите ваше имя.'; err.classList.remove('hidden'); return; }
+        if (phone.replace(/\D/g, '').length < 7) { err.textContent = 'Введите корректный номер телефона (минимум 7 цифр).'; err.classList.remove('hidden'); return; }
+        err.classList.add('hidden');
+        contactForm.classList.add('hidden');
+        document.getElementById('contact-success-msg').textContent = `Спасибо, ${name}. Специалист ателье Pionni del Alevtonni свяжется с вами по телефону ${phone} в ближайшее время.`;
+        contactSuccess.classList.remove('hidden');
+      });
+      document.getElementById('contact-reset-btn').addEventListener('click', () => {
+        contactForm.reset();
+        contactSuccess.classList.add('hidden');
+        contactForm.classList.remove('hidden');
+      });
+    })();
+  </script>
+</body>
+</html>

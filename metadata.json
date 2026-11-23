@@ -1,0 +1,6 @@
+{
+  "name": "Pionni del Alevtonni",
+  "description": "Ручные итальянские пионы премиум-класса для интерьеров, офисов и бутиков.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
