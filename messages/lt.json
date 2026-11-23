@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "title": "Pionni del Alevtonni — Rankų darbo itališki bijūnai jūsų interjerui",
+    "description": "Itališka dvasia jūsų interjere: rankomis formuoti bijūnai iš aukščiausios kokybės itališkų medžiagų biurams, butikams ir rezidencijoms."
+  },
+  "nav": {
+    "catalog": "Kolekcijos",
+    "metrics": "Meistrystė",
+    "reviews": "Atsiliepimai",
+    "contact": "Kontaktai",
+    "order": "Užsakyti",
+    "orderMobile": "Užsakyti kompoziciją",
+    "callAria": "Skambinti numeriu +373 785 85 585",
+    "openMenu": "Atidaryti meniu",
+    "closeMenu": "Uždaryti meniu",
+    "languageAria": "Pasirinkti kalbą"
+  },
+  "hero": {
+    "subtitle": "Rankų darbo bijūnai iš Italijos",
+    "titlePrefix": "Itališka dvasia",
+    "titleHighlight": "jūsų interjere",
+    "cta": "Rinktis kolekciją",
+    "scrollAria": "Slinkti žemyn"
+  },
+  "pillars": {
+    "p1Title": "01. Skulptūrinis modeliavimas",
+    "p1Text": "Kiekvieną bijūną rankomis formuoja Italijos meistrai: dešimtys šilkinių žiedlapių perteikia gyvą plastiką, rytinį išlinkimą ir išsiskleidusio žiedo gelmę.",
+    "p2Title": "02. Itališka medžiaga",
+    "p2Text": "Patentuotas soft-touch kompozitas iš Lombardijos prisilietimu nesiskiria nuo gyvo žiedo, neblunka po vitrinų šviestuvais ir išlaiko formos architektūrą dešimtmečius.",
+    "p3Title": "03. Statusas jūsų verslui",
+    "p3Text": "Nuo griežtų posėdžių salių iki prabangių mados butikų — įspūdingi bijūnai akimirksniu sukuria europietiško salono atmosferą ir traukia svečių žvilgsnius."
+  },
+  "reveal": {
+    "lead": "Interjero botanikos ateljė",
+    "brand": "Pionni del Alevtonni"
+  },
+  "catalog": {
+    "eyebrow": "Kolekcijų vitrina",
+    "heading": "Skulptūrinės kompozicijos biurams, butikams ir rezidencijoms",
+    "filterAria": "Filtruoti kolekcijas pagal interjero tipą",
+    "filters": {
+      "all": "Visos kolekcijos",
+      "boutique": "Butikams",
+      "office": "Biurams",
+      "residence": "Rezidencijoms"
+    },
+    "customPalette": "Individualus spalvų pritaikymas",
+    "orderBtn": "Užsakyti",
+    "items": {
+      "nero-di-milano": {
+        "categoryLabel": "Butikai ir salonai",
+        "specs": "Aukštis 95 cm · 11 žiedų · Itališkas soft-touch",
+        "description": "Pudros ir kreminių atspalvių bijūnai monolitiniame matiniame vulkaninio akmens inde. Sukurti centriniams podiumams ir koncepcinių parduotuvių vitrinoms.",
+        "alt": "Rankų darbo itališkų bijūnų kompozicija Nero di Milano prabangiame butike"
+      },
+      "aeterna-velluto": {
+        "categoryLabel": "Biurai ir priimamieji",
+        "specs": "Aukštis 78 cm · 9 žiedai · Aksominis kompozitas",
+        "description": "Kontrastingas pieno baltumo ir sodrių vyno atspalvių bijūnų ansamblis priimamojo stalui ar posėdžių salei. Pabrėžia architektūrinį erdvės griežtumą.",
+        "alt": "Baltų ir bordo bijūnų interjero kompozicija Aeterna Velluto ant priimamojo stalo"
+      },
+      "palazzo-grand": {
+        "categoryLabel": "Butikai ir viešbučiai",
+        "specs": "Aukštis 135 cm · 15 žiedų · Dūminis stiklas",
+        "description": "Įspūdinga vertikali šampano ir dulkėtos rožės atspalvių instaliacija rankomis pūstoje vazoje. Tampa pagrindiniu akcentu poilsio zonose ir holuose.",
+        "alt": "Aukšta interjero bijūnų instaliacija Palazzo Grand poilsio zonoje"
+      },
+      "botanica-pura": {
+        "categoryLabel": "Privačios rezidencijos",
+        "specs": "Aukštis 65 cm · 7 žiedai · Rankinis tonavimas",
+        "description": "Kamerinė puokštė su subtilia rankine kiekvieno žiedlapio apdaila ir gyva lapų faktūra. Idealiai tinka svetainėms, darbo kabinetams ir drabužinėms.",
+        "alt": "Meistro darbas formuojant itališko bijūno Botanica Pura žiedlapius"
+      }
+    }
+  },
+  "metrics": {
+    "eyebrow": "Privalumai skaičiais",
+    "heading": "Ilgaamžio prabangaus dekoro matematika",
+    "items": [
+      {
+        "value": "140+",
+        "label": "Rankomis formuotų žiedlapių",
+        "detail": "Kiekvienas didelis žiedas surenkamas iš dešimčių individualiai iškirptų ir tonuotų žiedlapių."
+      },
+      {
+        "value": "12 m.",
+        "label": "Spalvos atsparumas",
+        "detail": "Itališkas šviesai atsparus pigmentas išsaugo spalvos sodrumą po prožektoriais ir saulėje."
+      },
+      {
+        "value": "18 val.",
+        "label": "Meistro darbo vienam rinkiniui",
+        "detail": "Kruopšti stiebų skulptūrinė plastika ir žiedų kalibravimas pagal jūsų patalpos proporcijas."
+      },
+      {
+        "value": "0 €",
+        "label": "Priežiūros ir keitimo išlaidų",
+        "detail": "Jokio laistymo, jokių nubyrėjusių žiedlapių ir jokių savaitinių sąskaitų floristams."
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Klientų atsiliepimai",
+    "heading": "Įspūdis, kuris kasdien dirba jūsų prekės ženklui",
+    "items": [
+      {
+        "quote": "Pastačius Nero di Milano kompoziciją salės centre, klientai dažniau fotografuoja vitriną ir ilgiau užsibūna prie matavimosi kabinų. Per aštuonis mėnesius žiedai neprarado nei formos gaivumo, nei matinio švytėjimo.",
+        "author": "Valerija Morozova",
+        "role": "Koncepcinės parduotuvės „Atelier Nove“ vadovė",
+        "context": "Moteriškų drabužių butikas · 95 cm kompozicija"
+      },
+      {
+        "quote": "Gyvas puokštes architektūros biuro priimamajame tekdavo keisti kas keturias dienas. Itališki bijūnai Aeterna Velluto atrodo taip gyvai, kad partneriai susitikimo metu pasilenkia pajusti jų aromato.",
+        "author": "Andrius Kravčenko",
+        "role": "Vadovaujantis partneris, „K-Arch Studio“",
+        "context": "Biuras ir posėdžių salė · Sutaupyta iki € 3 200 per metus"
+      },
+      {
+        "quote": "Viešbučio fojė barui reikėjo akcento, atsparaus visą parą veikiančiam kondicionavimui ir šiltam vakariniam apšvietimui. Palazzo Grand nuo pirmos dienos tapo vizualiu interjero centru.",
+        "author": "Elena Russu",
+        "role": "Interjero direktorė, „Grand Lounge“",
+        "context": "Viešbučio holas · Individualus 135 cm aukštis"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Tiesioginis ryšys su ateljė",
+    "heading": "Sukursime kompoziciją pagal jūsų salės architektūrą",
+    "description": "Parinksime žiedų atspalvį pagal interjero apdailos paletę, apskaičiuosime vazono aukštį vitrinai ar posėdžių salei ir pasirūpinsime saugiu pristatymu bei išdėstymu.",
+    "phoneLabel": "Telefonas užsakymams ir konsultacijoms",
+    "hours": "Kasdien nuo 09:00 iki 20:00 · Individualus parinkimas pagal interjero nuotrauką",
+    "form": {
+      "nameLabel": "Jūsų vardas",
+      "namePlaceholder": "Pavyzdžiui, Elena",
+      "phoneLabel": "Telefonas",
+      "phonePlaceholder": "+373 785 85 585",
+      "spaceLabel": "Erdvės tipas",
+      "spaces": {
+        "office": "Biuras / Priimamasis",
+        "boutique": "Butikas / Parduotuvė",
+        "hotel": "Viešbutis / Restoranas",
+        "residence": "Privati rezidencija"
+      },
+      "commentLabel": "Pageidavimai dėl atspalvio ir aukščio",
+      "commentPlaceholder": "Apibūdinkite interjerą, norimą paletę arba zonos matmenis...",
+      "submit": "Prašyti kompozicijos parinkimo",
+      "errorName": "Prašome įvesti savo vardą.",
+      "errorPhone": "Įveskite teisingą telefono numerį (mažiausiai 7 skaitmenys).",
+      "successTitle": "Užklausa priimta",
+      "successPrefix": "Ačiū,",
+      "successMiddle": "Ateljė „Pionni del Alevtonni“ specialistas susisieks su jumis telefonu",
+      "successSuffix": "artimiausiu metu.",
+      "reset": "Siųsti dar vieną užklausą"
+    }
+  },
+  "footer": {
+    "tagline": "Rankų darbo bijūnai iš Italijos prabangiems interjerams · 2026"
+  },
+  "modal": {
+    "defaultCollection": "Individualus parinkimas",
+    "eyebrow": "Asmeninis užsakymas",
+    "subtitlePrefix": "Palikite kontaktus arba skambinkite tiesiogiai numeriu",
+    "closeAria": "Uždaryti užsakymo langą",
+    "nameLabel": "Jūsų vardas",
+    "namePlaceholder": "Jūsų vardas",
+    "phoneLabel": "Telefono numeris",
+    "phonePlaceholder": "+373 785 85 585",
+    "spaceLabel": "Erdvė",
+    "spaces": {
+      "boutique": "Butikas / Parduotuvė",
+      "office": "Biuras / Priimamasis",
+      "hotel": "Viešbutis / Restoranas",
+      "residence": "Privatus interjeras"
+    },
+    "submit": "Patvirtinti užklausą",
+    "errorName": "Prašome įvesti savo vardą.",
+    "errorPhone": "Įveskite teisingą telefono numerį ryšiui.",
+    "successTitlePrefix": "Užsakymas «",
+    "successTitleSuffix": "» patvirtintas",
+    "successMiddle": "Mūsų floristas-dekoratorius paskambins jums numeriu",
+    "successSuffix": "dėl vazos detalių ir pristatymo laiko suderinimo.",
+    "back": "Grįžti į svetainę"
+  }
+}

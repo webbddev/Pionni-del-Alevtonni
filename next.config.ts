@@ -1,5 +1,8 @@
 import type { NextConfig } from 'next';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 export default function createNextConfig(phase: string): NextConfig {
   const nextConfig: NextConfig = {
@@ -36,5 +39,5 @@ export default function createNextConfig(phase: string): NextConfig {
     },
   };
 
-  return nextConfig;
+  return withNextIntl(nextConfig);
 }

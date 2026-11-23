@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "title": "Pionni del Alevtonni — Handmade Italian Peonies for Luxury Interiors",
+    "description": "Italian soul in your interior: hand-sculpted peonies crafted from premium Italian materials for executive offices, boutiques, and private residences."
+  },
+  "nav": {
+    "catalog": "Collections",
+    "metrics": "Craftsmanship",
+    "reviews": "Testimonials",
+    "contact": "Contact",
+    "order": "Order",
+    "orderMobile": "Order Arrangement",
+    "callAria": "Call +373 785 85 585",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "languageAria": "Select language"
+  },
+  "hero": {
+    "subtitle": "Handmade peonies from Italy",
+    "titlePrefix": "Italian soul in",
+    "titleHighlight": "your interior",
+    "cta": "Explore collection",
+    "scrollAria": "Scroll down"
+  },
+  "pillars": {
+    "p1Title": "01. Hand-Sculpted Craft",
+    "p1Text": "Every peony is shaped by hand by Italian artisans: dozens of silky petals capture organic movement, morning curvature, and the natural depth of a blooming flower.",
+    "p2Title": "02. Italian Luxury Material",
+    "p2Text": "Patented soft-touch botanical composite from Lombardy feels indistinguishable from live blooms, resists spotlight fading, and holds its architectural silhouette for decades.",
+    "p3Title": "03. Presence for Business",
+    "p3Text": "From disciplined boardrooms to flagship fashion boutiques — sculptural peonies instantly establish the poise of a European salon and draw every guest's eye."
+  },
+  "reveal": {
+    "lead": "Interior Botanical Atelier",
+    "brand": "Pionni del Alevtonni"
+  },
+  "catalog": {
+    "eyebrow": "Collection Showcase",
+    "heading": "Sculptural arrangements for offices, boutiques, and residences",
+    "filterAria": "Filter collections by interior type",
+    "filters": {
+      "all": "All Collections",
+      "boutique": "Boutiques",
+      "office": "Offices",
+      "residence": "Residences"
+    },
+    "customPalette": "Bespoke palette adaptation",
+    "orderBtn": "Order",
+    "items": {
+      "nero-di-milano": {
+        "categoryLabel": "Boutiques & Showrooms",
+        "specs": "Height 95 cm · 11 blooms · Italian soft-touch",
+        "description": "Powder blush and ivory peonies set in a monolithic matte volcanic-stone vessel. Designed for central plinths and concept-store window displays.",
+        "alt": "Handmade Italian peonies Nero di Milano arrangement inside a luxury boutique"
+      },
+      "aeterna-velluto": {
+        "categoryLabel": "Offices & Reception",
+        "specs": "Height 78 cm · 9 blooms · Velvet composite",
+        "description": "A high-contrast ensemble of milk-white and deep burgundy peonies tailored for reception desks and executive meeting tables.",
+        "alt": "White and burgundy peony arrangement Aeterna Velluto on an office reception desk"
+      },
+      "palazzo-grand": {
+        "categoryLabel": "Boutiques & Hotels",
+        "specs": "Height 135 cm · 15 blooms · Smoked glass",
+        "description": "A commanding vertical installation in champagne and dusty rose hues inside a hand-blown glass vase. Anchors lounge zones and grand lobbies.",
+        "alt": "Tall architectural peony installation Palazzo Grand in a contemporary lounge"
+      },
+      "botanica-pura": {
+        "categoryLabel": "Private Residences",
+        "specs": "Height 65 cm · 7 blooms · Hand-tinted",
+        "description": "An intimate bouquet with fine artisan shading on every petal and lifelike foliage texture. Ideal for living rooms, studies, and dressing suites.",
+        "alt": "Artisan hands shaping Italian peony petals for Botanica Pura"
+      }
+    }
+  },
+  "metrics": {
+    "eyebrow": "Advantages in Numbers",
+    "heading": "The economics of enduring luxury botanicals",
+    "items": [
+      {
+        "value": "140+",
+        "label": "Hand-formed petals",
+        "detail": "Each statement bloom is assembled from dozens of individually cut and hand-tinted petals."
+      },
+      {
+        "value": "12 yrs",
+        "label": "Colorfast longevity",
+        "detail": "Lightfast Italian pigments preserve their chromatic depth under gallery spotlights and daylight."
+      },
+      {
+        "value": "18 h",
+        "label": "Artisan work per piece",
+        "detail": "Precision stem sculpting and bloom calibration tailored to the proportions of your space."
+      },
+      {
+        "value": "€ 0",
+        "label": "Maintenance & replacement cost",
+        "detail": "No watering, zero fallen petals, and no recurring weekly floristry invoices."
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Client Reviews",
+    "heading": "An impression that elevates your brand every day",
+    "items": [
+      {
+        "quote": "After placing Nero di Milano in the center of our showroom, clients started photographing the display far more often and lingering by the fitting rooms. Eight months in, the blooms look as crisp as day one.",
+        "author": "Valeria Morozova",
+        "role": "Store Director, Atelier Nove",
+        "context": "Womenswear Boutique · 95 cm Arrangement"
+      },
+      {
+        "quote": "Fresh bouquets on our architecture firm's reception desk had to be replaced every four days. Aeterna Velluto looks so lifelike that visiting partners instinctively lean in to catch the scent.",
+        "author": "Andrei Kravchenko",
+        "role": "Managing Partner, K-Arch Studio",
+        "context": "Office & Boardroom · Up to € 3,200 saved annually"
+      },
+      {
+        "quote": "For our lobby lounge we needed a focal piece impervious to round-the-clock air conditioning and warm evening lighting. Palazzo Grand became the visual anchor of the room from the very first day.",
+        "author": "Elena Russu",
+        "role": "Interior Director, Grand Lounge",
+        "context": "Hotel Lobby · Custom 135 cm Height"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Direct Atelier Line",
+    "heading": "Tailored to the architecture of your space",
+    "description": "We match petal tones to your interior finishes, size each vessel for your storefront or boardroom, and arrange careful delivery with on-site styling.",
+    "phoneLabel": "Phone for orders and consultations",
+    "hours": "Daily from 09:00 to 20:00 · Bespoke selection from interior photos",
+    "form": {
+      "nameLabel": "Your name",
+      "namePlaceholder": "e.g. Elena",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "+373 785 85 585",
+      "spaceLabel": "Space type",
+      "spaces": {
+        "office": "Office / Reception",
+        "boutique": "Boutique / Store",
+        "hotel": "Hotel / Restaurant",
+        "residence": "Private Residence"
+      },
+      "commentLabel": "Preferred palette & dimensions",
+      "commentPlaceholder": "Describe your interior, color palette, or target placement...",
+      "submit": "Request bespoke selection",
+      "errorName": "Please enter your name.",
+      "errorPhone": "Please enter a valid phone number (at least 7 digits).",
+      "successTitle": "Request received",
+      "successPrefix": "Thank you,",
+      "successMiddle": "A specialist from Pionni del Alevtonni will call you at",
+      "successSuffix": "shortly.",
+      "reset": "Send another request"
+    }
+  },
+  "footer": {
+    "tagline": "Handmade Italian peonies for luxury interiors · 2026"
+  },
+  "modal": {
+    "defaultCollection": "Bespoke Selection",
+    "eyebrow": "Personal Order",
+    "subtitlePrefix": "Leave your details or call us directly at",
+    "closeAria": "Close order dialog",
+    "nameLabel": "Your name",
+    "namePlaceholder": "Your name",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+373 785 85 585",
+    "spaceLabel": "Space",
+    "spaces": {
+      "boutique": "Boutique / Store",
+      "office": "Office / Reception",
+      "hotel": "Hotel / Restaurant",
+      "residence": "Private Interior"
+    },
+    "submit": "Confirm request",
+    "errorName": "Please enter your name.",
+    "errorPhone": "Please enter a valid phone number.",
+    "successTitlePrefix": "Order for «",
+    "successTitleSuffix": "» confirmed",
+    "successMiddle": "Our floral stylist will call you at",
+    "successSuffix": "to finalize vessel details and delivery timing.",
+    "back": "Return to site"
+  }
+}

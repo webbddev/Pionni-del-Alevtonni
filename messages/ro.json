@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "title": "Pionni del Alevtonni — Bujori italieni lucrați manual pentru interior",
+    "description": "Suflet italian în interiorul dumneavoastră: bujori sculptați manual din materiale italiene premium pentru birouri, buticuri și reședințe."
+  },
+  "nav": {
+    "catalog": "Colecții",
+    "metrics": "Măiestrie",
+    "reviews": "Recenzii",
+    "contact": "Contacte",
+    "order": "Comandă",
+    "orderMobile": "Comandă compoziția",
+    "callAria": "Apelați +373 785 85 585",
+    "openMenu": "Deschide meniul",
+    "closeMenu": "Închide meniul",
+    "languageAria": "Selectare limbă"
+  },
+  "hero": {
+    "subtitle": "Bujori lucrați manual din Italia",
+    "titlePrefix": "Suflet italian în",
+    "titleHighlight": "interiorul dumneavoastră",
+    "cta": "Alegeți colecția",
+    "scrollAria": "Derulați în jos"
+  },
+  "pillars": {
+    "p1Title": "01. Modelaj sculptural",
+    "p1Text": "Fiecare bujor este modelat manual de meșteri italieni: zeci de petale mătăsoase redau plasticitatea vie, curbura matinală și profunzimea florii înflorite.",
+    "p2Title": "02. Material italian",
+    "p2Text": "Compozitul brevetat soft-touch din Lombardia nu se deosebește la atingere de floarea vie, nu se decolorează sub spoturile vitrinei și își păstrează forma decenii la rând.",
+    "p3Title": "03. Statut pentru afaceri",
+    "p3Text": "De la săli de ședințe sobre până la buticuri de lux — bujorii amplificați creează instantaneu atmosfera unui salon european și atrag privirile oaspeților."
+  },
+  "reveal": {
+    "lead": "Atelier de botanică de interior",
+    "brand": "Pionni del Alevtonni"
+  },
+  "catalog": {
+    "eyebrow": "Vitrina colecțiilor",
+    "heading": "Compoziții sculpturale pentru birouri, buticuri și reședințe",
+    "filterAria": "Filtrarea colecțiilor după tipul de interior",
+    "filters": {
+      "all": "Toate colecțiile",
+      "boutique": "Pentru buticuri",
+      "office": "Pentru birouri",
+      "residence": "Pentru reședințe"
+    },
+    "customPalette": "Adaptare individuală a paletei",
+    "orderBtn": "Comandă",
+    "items": {
+      "nero-di-milano": {
+        "categoryLabel": "Buticuri și showroom-uri",
+        "specs": "Înălțime 95 cm · 11 boboci · Soft-touch italian",
+        "description": "Bujori pudrați și crem într-un vas monolitic mat din piatră vulcanică. Creați pentru podiumuri centrale și vitrinele concept-store-urilor.",
+        "alt": "Compoziție de bujori italieni lucrați manual Nero di Milano într-un butic"
+      },
+      "aeterna-velluto": {
+        "categoryLabel": "Birouri și recepții",
+        "specs": "Înălțime 78 cm · 9 boboci · Compozit catifelat",
+        "description": "Ansamblu contrastant din bujori alb-lăptos și vișiniu profund pentru recepție sau masa de consiliu. Subliniază rigoarea arhitecturală a spațiului.",
+        "alt": "Compoziție de interior din bujori albi și bordo Aeterna Velluto la recepție"
+      },
+      "palazzo-grand": {
+        "categoryLabel": "Buticuri și hoteluri",
+        "specs": "Înălțime 135 cm · 15 boboci · Sticlă fumurie",
+        "description": "Instalație verticală impunătoare în nuanțe de șampanie și roz prăfuit într-o vază suflată manual. Devine punctul focal în zonele lounge și holuri.",
+        "alt": "Instalație florală înaltă Palazzo Grand într-un salon lounge"
+      },
+      "botanica-pura": {
+        "categoryLabel": "Reședințe private",
+        "specs": "Înălțime 65 cm · 7 boboci · Nuanțare manuală",
+        "description": "Buchet intim cu prelucrare manuală fină a fiecărei petale și textură naturală a frunzelor. Ideal pentru livinguri, birouri personale și dressinguri.",
+        "alt": "Lucru artizanal asupra petalelor bujorului italian Botanica Pura"
+      }
+    }
+  },
+  "metrics": {
+    "eyebrow": "Avantaje în cifre",
+    "heading": "Matematica decorului premium durabil",
+    "items": [
+      {
+        "value": "140+",
+        "label": "Petale modelate manual",
+        "detail": "Fiecare boboc mare este asamblat din zeci de petale decupate și nuanțate individual."
+      },
+      {
+        "value": "12 ani",
+        "label": "Rezistență a nuanței",
+        "detail": "Pigmentul italian rezistent la lumină își păstrează profunzimea culorii sub spoturi și soare."
+      },
+      {
+        "value": "18 ore",
+        "label": "Muncă de atelier per set",
+        "detail": "Plastică sculpturală minuțioasă a tulpinilor și calibrarea bobocilor după proporțiile încăperii."
+      },
+      {
+        "value": "0 €",
+        "label": "Costuri de întreținere",
+        "detail": "Fără udare, fără petale scuturate și fără facturi săptămânale către servicii florale."
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Recenziile clienților",
+    "heading": "O impresie care lucrează pentru brandul dumneavoastră zilnic",
+    "items": [
+      {
+        "quote": "După amplasarea compoziției Nero di Milano în centrul sălii, clienții fotografiază mai des vitrina și zăbovesc lângă cabinele de probă. În opt luni florile nu și-au pierdut nici prospețimea formei, nici luciul mat.",
+        "author": "Valeria Morozova",
+        "role": "Manager concept-store Atelier Nove",
+        "context": "Butic de modă feminină · Compoziție 95 cm"
+      },
+      {
+        "quote": "Buchetele vii de la recepția biroului de arhitectură necesitau înlocuire la fiecare patru zile. Bujorii italieni Aeterna Velluto arată atât de viu încât partenerii se apleacă la întâlnire ca să le simtă parfumul.",
+        "author": "Andrei Kravcenko",
+        "role": "Partener coordonator K-Arch Studio",
+        "context": "Birou și sală de ședințe · Economie de până la € 3 200 pe an"
+      },
+      {
+        "quote": "Pentru lobby-bar aveam nevoie de un accent rezistent la climatizarea non-stop și la lumina caldă de seară. Palazzo Grand a devenit ancora vizuală a interiorului din prima zi.",
+        "author": "Elena Russu",
+        "role": "Director de design interior Grand Lounge",
+        "context": "Hol hotelier · Înălțime personalizată 135 cm"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Legătură directă cu atelierul",
+    "heading": "Creăm compoziția potrivită arhitecturii sălii dumneavoastră",
+    "description": "Alegem nuanța bobocilor după paleta finisajelor, calculăm înălțimea vasului pentru vitrină sau sala de consiliu și asigurăm livrare atentă cu aranjare profesională.",
+    "phoneLabel": "Telefon pentru comenzi și consultanță",
+    "hours": "Zilnic între 09:00 și 20:00 · Selecție personalizată după fotografia interiorului",
+    "form": {
+      "nameLabel": "Numele dumneavoastră",
+      "namePlaceholder": "De exemplu, Elena",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "+373 785 85 585",
+      "spaceLabel": "Tipul spațiului",
+      "spaces": {
+        "office": "Birou / Recepție",
+        "boutique": "Butic / Magazin",
+        "hotel": "Hotel / Restaurant",
+        "residence": "Reședință privată"
+      },
+      "commentLabel": "Preferințe de nuanță și înălțime",
+      "commentPlaceholder": "Descrieți interiorul, paleta dorită sau dimensiunile zonei...",
+      "submit": "Solicită selecția compoziției",
+      "errorName": "Vă rugăm să introduceți numele dumneavoastră.",
+      "errorPhone": "Introduceți un număr de telefon valid (minim 7 cifre).",
+      "successTitle": "Cererea a fost înregistrată",
+      "successPrefix": "Mulțumim,",
+      "successMiddle": "Specialistul atelierului Pionni del Alevtonni vă va contacta la numărul",
+      "successSuffix": "în cel mai scurt timp.",
+      "reset": "Trimite o altă cerere"
+    }
+  },
+  "footer": {
+    "tagline": "Bujori lucrați manual din Italia pentru interioare premium · 2026"
+  },
+  "modal": {
+    "defaultCollection": "Selecție personalizată",
+    "eyebrow": "Comandă personalizată",
+    "subtitlePrefix": "Lăsați datele de contact sau sunați direct la numărul",
+    "closeAria": "Închide fereastra de comandă",
+    "nameLabel": "Numele dumneavoastră",
+    "namePlaceholder": "Numele dumneavoastră",
+    "phoneLabel": "Număr de telefon",
+    "phonePlaceholder": "+373 785 85 585",
+    "spaceLabel": "Spațiu",
+    "spaces": {
+      "boutique": "Butic / Magazin",
+      "office": "Birou / Recepție",
+      "hotel": "Hotel / Restaurant",
+      "residence": "Interior privat"
+    },
+    "submit": "Confirmă cererea",
+    "errorName": "Vă rugăm să introduceți numele dumneavoastră.",
+    "errorPhone": "Introduceți un număr de telefon valid pentru contact.",
+    "successTitlePrefix": "Comanda pentru «",
+    "successTitleSuffix": "» a fost înregistrată",
+    "successMiddle": "Decoratorul nostru floral vă va suna la numărul",
+    "successSuffix": "pentru a stabili detaliile vazei și ora livrării.",
+    "back": "Înapoi la site"
+  }
+}

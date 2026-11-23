@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Lenis from 'lenis';
+import { useTranslations } from 'next-intl';
 import {
   ArrowRight,
   Check,
@@ -15,125 +16,65 @@ import ScrollVideoBackground from './ScrollVideoBackground';
 import Navbar from './Navbar';
 
 type CategoryKey = 'all' | 'boutique' | 'office' | 'residence';
+type ItemId = 'nero-di-milano' | 'aeterna-velluto' | 'palazzo-grand' | 'botanica-pura';
 
-interface CatalogItem {
-  id: string;
+interface CatalogMeta {
+  id: ItemId;
   title: string;
   category: Exclude<CategoryKey, 'all'>;
-  categoryLabel: string;
-  specs: string;
-  description: string;
   price: string;
   image: string;
-  alt: string;
 }
 
-const CATALOG_ITEMS: CatalogItem[] = [
+interface MetricEntry {
+  value: string;
+  label: string;
+  detail: string;
+}
+
+interface ReviewEntry {
+  quote: string;
+  author: string;
+  role: string;
+  context: string;
+}
+
+const CATALOG_META: CatalogMeta[] = [
   {
     id: 'nero-di-milano',
     title: 'Nero di Milano',
     category: 'boutique',
-    categoryLabel: 'Бутики и шоурумы',
-    specs: 'Высота 95 см · 11 бутонов · Итальянский софт-тач',
-    description:
-      'Пудровые и кремовые пионы в монолитном матовом кашпо из вулканического камня. Созданы для центральных подиумов и витрин концепт-сторов.',
     price: '€ 890',
     image: '/images/peony-boutique.jpg',
-    alt: 'Композиция ручных итальянских пионов Nero di Milano в интерьере бутика',
   },
   {
     id: 'aeterna-velluto',
     title: 'Aeterna Velluto',
     category: 'office',
-    categoryLabel: 'Офисы и ресепшн',
-    specs: 'Высота 78 см · 9 бутонов · Бархатный композит',
-    description:
-      'Контрастный ансамбль молочно-белых и глубоких винных пионов на стойку ресепшн или стол переговоров. Подчеркивает архитектурную строгость пространства.',
     price: '€ 640',
     image: '/images/peony-office.jpg',
-    alt: 'Интерьерная композиция из белых и бордовых пионов Aeterna Velluto на стойке ресепшн',
   },
   {
     id: 'palazzo-grand',
     title: 'Palazzo Grand',
     category: 'boutique',
-    categoryLabel: 'Бутики и отели',
-    specs: 'Высота 135 см · 15 бутонов · Дымчатое стекло',
-    description:
-      'Масштабная вертикальная инсталляция оттенка шампань и пыльной розы в вазе ручной выдувки. Притягивает внимание в лаунж-зонах и холлах.',
     price: '€ 1 450',
     image: '/images/peony-lounge.jpg',
-    alt: 'Высокая интерьерная инсталляция из пионов Palazzo Grand в лаунж-зале',
   },
   {
     id: 'botanica-pura',
     title: 'Botanica Pura',
     category: 'residence',
-    categoryLabel: 'Частные резиденции',
-    specs: 'Высота 65 см · 7 бутонов · Ручная тонировка',
-    description:
-      'Камерный букет с тончайшей ручной проработкой каждого лепестка и живой фактурой листа. Идеален для гостиных, кабинетов и приватных гардеробных.',
     price: '€ 480',
     image: '/images/peony-atelier.jpg',
-    alt: 'Мастерская работа над лепестками итальянского пиона Botanica Pura',
   },
 ];
 
-const METRICS = [
-  {
-    value: '140+',
-    label: 'Лепестков ручной формовки',
-    detail: 'Каждый крупный бутон собирается из десятков индивидуально вырезанных и тонированных лепестков.',
-  },
-  {
-    value: '12 лет',
-    label: 'Стойкости оттенка',
-    detail: 'Итальянский светостойкий пигмент сохраняет глубину цвета под витринными софитами и солнцем.',
-  },
-  {
-    value: '18 ч',
-    label: 'Работы мастера на сет',
-    detail: 'Кропотливая скульптурная пластика стеблей и калибровка бутонов под пропорции вашего помещения.',
-  },
-  {
-    value: '0 €',
-    label: 'Затрат на уход и замену',
-    detail: 'Никакого полива, осыпающихся лепестков и еженедельных счетов флористическим службам.',
-  },
-];
-
-const REVIEWS = [
-  {
-    quote:
-      'После установки композиции Nero di Milano в центре зала клиенты стали чаще фотографировать витрину и задерживаться у примерочных. За восемь месяцев цветы не потеряли ни свежести формы, ни матового сияния.',
-    author: 'Валерия Морозова',
-    role: 'Управляющая концепт-стора Atelier Nove',
-    context: 'Бутик женской одежды · Композиция 95 см',
-  },
-  {
-    quote:
-      'Живые букеты на ресепшн архитектурного бюро требовали замены каждые четыре дня. Итальянские пионы Aeterna Velluto выглядят настолько живо, что партнёры при встрече наклоняются, чтобы ощутить аромат.',
-    author: 'Андрей Кравченко',
-    role: 'Управляющий партнёр K-Arch Studio',
-    context: 'Офис и переговорная · Экономия до € 3 200 в год',
-  },
-  {
-    quote:
-      'Для лобби-бара нам требовался акцент, устойчивый к круглосуточному кондиционированию и тёплому вечернему свету. Palazzo Grand стал визуальным якорем интерьера с первого дня.',
-    author: 'Елена Руссу',
-    role: 'Директор по интерьерам Grand Lounge',
-    context: 'Гостиничный холл · Индивидуальная высота 135 см',
-  },
-];
-
-const FILTER_TABS: { key: CategoryKey; label: string }[] = [
-  { key: 'all', label: 'Все коллекции' },
-  { key: 'boutique', label: 'Для бутиков' },
-  { key: 'office', label: 'Для офисов' },
-  { key: 'residence', label: 'Для резиденций' },
-];
+const FILTER_KEYS: CategoryKey[] = ['all', 'boutique', 'office', 'residence'];
 
 export default function AtelierLanding() {
+  const t = useTranslations();
+
   const heroRef = useRef<HTMLElement | null>(null);
   const cardsTriggerRef = useRef<HTMLDivElement | null>(null);
   const fixedCardsRef = useRef<HTMLDivElement | null>(null);
@@ -146,28 +87,31 @@ export default function AtelierLanding() {
 
   // Order modal state
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState<string>('Nero di Milano');
+  const [selectedCollection, setSelectedCollection] = useState<string>('');
   const [modalName, setModalName] = useState('');
   const [modalPhone, setModalPhone] = useState('');
-  const [modalSpace, setModalSpace] = useState('Бутик / Магазин');
+  const [modalSpace, setModalSpace] = useState('boutique');
   const [modalError, setModalError] = useState('');
   const [modalSubmitted, setModalSubmitted] = useState(false);
 
   // Contact section form state
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
-  const [contactSpace, setContactSpace] = useState('Офис / Ресепшн');
+  const [contactSpace, setContactSpace] = useState('office');
   const [contactComment, setContactComment] = useState('');
   const [contactError, setContactError] = useState('');
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
+  const metricsList = t.raw('metrics.items') as MetricEntry[];
+  const reviewsList = t.raw('reviews.items') as ReviewEntry[];
+
   const filteredItems =
     activeFilter === 'all'
-      ? CATALOG_ITEMS
-      : CATALOG_ITEMS.filter((item) => item.category === activeFilter);
+      ? CATALOG_META
+      : CATALOG_META.filter((item) => item.category === activeFilter);
 
   const openOrderModal = (collectionTitle?: string) => {
-    setSelectedCollection(collectionTitle || 'Индивидуальный подбор');
+    setSelectedCollection(collectionTitle || t('modal.defaultCollection'));
     setModalSubmitted(false);
     setModalError('');
     setModalOpen(true);
@@ -179,7 +123,7 @@ export default function AtelierLanding() {
 
     const lenis = new Lenis({
       duration: 1.25,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (x) => Math.min(1, 1.001 - Math.pow(2, -10 * x)),
       smoothWheel: true,
       anchors: { offset: -80 },
     });
@@ -215,7 +159,7 @@ export default function AtelierLanding() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
-  // Hero fade on scroll (1-to-1 from spec)
+  // Hero fade on scroll
   useEffect(() => {
     const updateHeroOpacity = () => {
       if (!heroRef.current) return;
@@ -227,7 +171,7 @@ export default function AtelierLanding() {
     return () => window.removeEventListener('scroll', updateHeroOpacity);
   }, []);
 
-  // Fixed cards horizontal mask reveal synced with scroll (1-to-1 from spec)
+  // Fixed cards horizontal mask reveal synced with scroll
   useEffect(() => {
     let rafId = 0;
 
@@ -278,7 +222,7 @@ export default function AtelierLanding() {
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // Section 3 IntersectionObserver (1-to-1 from spec)
+  // Section 3 IntersectionObserver
   useEffect(() => {
     const target = sectionThreeInnerRef.current;
     if (!target) return;
@@ -305,11 +249,11 @@ export default function AtelierLanding() {
   const handleModalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!modalName.trim()) {
-      setModalError('Пожалуйста, укажите ваше имя.');
+      setModalError(t('modal.errorName'));
       return;
     }
     if (!validatePhone(modalPhone)) {
-      setModalError('Введите корректный номер телефона для связи.');
+      setModalError(t('modal.errorPhone'));
       return;
     }
     setModalError('');
@@ -319,11 +263,11 @@ export default function AtelierLanding() {
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactName.trim()) {
-      setContactError('Пожалуйста, укажите ваше имя.');
+      setContactError(t('contact.form.errorName'));
       return;
     }
     if (!validatePhone(contactPhone)) {
-      setContactError('Введите корректный номер телефона (минимум 7 цифр).');
+      setContactError(t('contact.form.errorPhone'));
       return;
     }
     setContactError('');
@@ -335,7 +279,7 @@ export default function AtelierLanding() {
       <ScrollVideoBackground />
       <Navbar onOpenOrderModal={openOrderModal} />
 
-      {/* Fixed Cards Overlay (Spec Section 2) */}
+      {/* Fixed Cards Overlay */}
       <div
         ref={fixedCardsRef}
         id="fixed-cards"
@@ -347,26 +291,26 @@ export default function AtelierLanding() {
         >
           <div className="card">
             <h3 className="mb-3 text-xl font-bold text-white sm:text-2xl">
-              01. Скульптурная лепка
+              {t('pillars.p1Title')}
             </h3>
             <p className="text-sm leading-relaxed text-neutral-300">
-              Каждый пион формуется вручную итальянскими мастерами: десятки шелковистых лепестков передают живую пластику, утренний изгиб и глубину раскрытого бутона.
+              {t('pillars.p1Text')}
             </p>
           </div>
           <div className="card">
             <h3 className="mb-3 text-xl font-bold text-white sm:text-2xl">
-              02. Итальянский материал
+              {t('pillars.p2Title')}
             </h3>
             <p className="text-sm leading-relaxed text-neutral-300">
-              Запатентованный софт-тач из Ломбардии неотличим на ощупь от живого цветка, не выгорает под витринными софитами и сохраняет архитектуру формы десятилетиями.
+              {t('pillars.p2Text')}
             </p>
           </div>
           <div className="card">
             <h3 className="mb-3 text-xl font-bold text-white sm:text-2xl">
-              03. Статус для бизнеса
+              {t('pillars.p3Title')}
             </h3>
             <p className="text-sm leading-relaxed text-neutral-300">
-              От строгих офисных переговорных до модных бутиков — крупные пионы мгновенно задают атмосферу европейского салона и притягивают взгляды гостей.
+              {t('pillars.p3Text')}
             </p>
           </div>
         </div>
@@ -374,7 +318,7 @@ export default function AtelierLanding() {
 
       {/* Main Content Flow */}
       <main id="content" className="relative z-[2]">
-        {/* Section 1: Hero (1-to-1 with Spec) */}
+        {/* Section 1: Hero */}
         <section
           ref={heroRef}
           id="hero"
@@ -391,7 +335,7 @@ export default function AtelierLanding() {
 
           <div className="content relative z-10 flex flex-1 flex-col items-center justify-end px-6 pb-20 text-center sm:pb-24">
             <p className="subtitle mb-4 text-xs tracking-[0.14em] text-neutral-300 uppercase sm:text-sm">
-              Ручные пионы из Италии
+              {t('hero.subtitle')}
             </p>
             <h1
               className="max-w-4xl font-semibold tracking-tight text-white"
@@ -401,13 +345,13 @@ export default function AtelierLanding() {
                 textWrap: 'balance',
               }}
             >
-              Итальянская душа в{' '}
+              {t('hero.titlePrefix')}{' '}
               <span className="underlined relative inline-block">
                 <span
                   className="line absolute bottom-1 left-0 h-[10px] w-full rounded-[2px] bg-[#2C5C88]"
                   aria-hidden="true"
                 />
-                <span className="relative">вашем интерьере</span>
+                <span className="relative">{t('hero.titleHighlight')}</span>
               </span>
             </h1>
 
@@ -424,7 +368,7 @@ export default function AtelierLanding() {
                 href="#catalog"
                 className="cta-btn inline-flex items-center gap-2 rounded-lg bg-[#2C5C88] px-8 py-3.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#3a7aad]"
               >
-                <span>Подобрать коллекцию</span>
+                <span>{t('hero.cta')}</span>
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
@@ -432,7 +376,7 @@ export default function AtelierLanding() {
 
           <a
             href="#cards-trigger"
-            aria-label="Прокрутить вниз"
+            aria-label={t('hero.scrollAria')}
             className="bounce-arrow relative z-10 flex justify-center pb-8"
           >
             <ChevronDown
@@ -451,7 +395,7 @@ export default function AtelierLanding() {
         {/* Spacer */}
         <div className="h-[100vh]" aria-hidden="true" />
 
-        {/* Section 3: Reveal (1-to-1 with Spec) */}
+        {/* Section 3: Reveal */}
         <section
           id="section-three"
           className="relative flex min-h-screen items-end justify-center px-6 pb-20 sm:px-10 sm:pb-32"
@@ -466,7 +410,7 @@ export default function AtelierLanding() {
             }`}
           >
             <p className="mb-3 text-base text-neutral-300">
-              Ателье интерьерной ботаники
+              {t('reveal.lead')}
             </p>
             <h2
               className="font-bold tracking-tight text-white"
@@ -476,19 +420,19 @@ export default function AtelierLanding() {
                 textWrap: 'balance',
               }}
             >
-              Pionni del Alevtonni
+              {t('reveal.brand')}
             </h2>
           </div>
         </section>
 
         {/* Studio Continuation Surface */}
         <div className="relative z-10 border-t border-white/[0.08] bg-[#010101]/90 backdrop-blur-md">
-          {/* Studio Section 4: Catalog Showcase with Prices */}
+          {/* Studio Section 4: Catalog Showcase */}
           <section id="catalog" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24 sm:px-10 sm:py-32">
             <div className="flex flex-col justify-between gap-8 border-b border-white/10 pb-10 lg:flex-row lg:items-end">
               <div className="max-w-2xl">
                 <p className="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">
-                  Витрина коллекций
+                  {t('catalog.eyebrow')}
                 </p>
                 <h2
                   className="font-semibold tracking-tight text-white"
@@ -498,32 +442,32 @@ export default function AtelierLanding() {
                     textWrap: 'balance',
                   }}
                 >
-                  Скульптурные композиции для офисов, бутиков и резиденций
+                  {t('catalog.heading')}
                 </h2>
               </div>
 
               {/* Interactive Category Filter */}
               <div
                 role="tablist"
-                aria-label="Фильтр коллекций по типу интерьера"
+                aria-label={t('catalog.filterAria')}
                 className="flex flex-wrap items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] p-1"
               >
-                {FILTER_TABS.map((tab) => {
-                  const active = activeFilter === tab.key;
+                {FILTER_KEYS.map((key) => {
+                  const active = activeFilter === key;
                   return (
                     <button
-                      key={tab.key}
+                      key={key}
                       type="button"
                       role="tab"
                       aria-selected={active}
-                      onClick={() => setActiveFilter(tab.key)}
+                      onClick={() => setActiveFilter(key)}
                       className={`cursor-pointer rounded-md px-3.5 py-2 text-xs font-medium whitespace-nowrap transition-colors duration-200 sm:text-sm ${
                         active
                           ? 'bg-[#2C5C88] text-white'
                           : 'text-neutral-300 hover:bg-white/[0.06] hover:text-white'
                       }`}
                     >
-                      {tab.label}
+                      {t(`catalog.filters.${key}`)}
                     </button>
                   );
                 })}
@@ -539,7 +483,7 @@ export default function AtelierLanding() {
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0c0c0f]">
                     <Image
                       src={item.image}
-                      alt={item.alt}
+                      alt={t(`catalog.items.${item.id}.alt`)}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       referrerPolicy="no-referrer"
@@ -554,9 +498,9 @@ export default function AtelierLanding() {
                   <div className="flex flex-1 flex-col justify-between p-7 sm:p-8">
                     <div>
                       <div className="mb-2 flex flex-wrap items-center gap-2 text-xs text-neutral-400">
-                        <span>{item.categoryLabel}</span>
+                        <span>{t(`catalog.items.${item.id}.categoryLabel`)}</span>
                         <span aria-hidden="true">·</span>
-                        <span>{item.specs}</span>
+                        <span>{t(`catalog.items.${item.id}.specs`)}</span>
                       </div>
 
                       <div className="flex items-baseline justify-between gap-4">
@@ -569,20 +513,20 @@ export default function AtelierLanding() {
                       </div>
 
                       <p className="mt-3 text-sm leading-relaxed text-neutral-300">
-                        {item.description}
+                        {t(`catalog.items.${item.id}.description`)}
                       </p>
                     </div>
 
                     <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-5">
                       <span className="text-xs text-neutral-400">
-                        Индивидуальная адаптация палитры
+                        {t('catalog.customPalette')}
                       </span>
                       <button
                         type="button"
                         onClick={() => openOrderModal(item.title)}
                         className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#2C5C88] px-5 py-2.5 text-sm font-medium text-white whitespace-nowrap transition-colors duration-200 hover:bg-[#3a7aad]"
                       >
-                        <span>Заказать</span>
+                        <span>{t('catalog.orderBtn')}</span>
                         <ArrowRight className="h-4 w-4" aria-hidden="true" />
                       </button>
                     </div>
@@ -600,7 +544,7 @@ export default function AtelierLanding() {
             <div className="mx-auto max-w-6xl">
               <div className="mb-14 max-w-2xl">
                 <p className="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">
-                  Преимущества в цифрах
+                  {t('metrics.eyebrow')}
                 </p>
                 <h2
                   className="font-semibold tracking-tight text-white"
@@ -610,16 +554,13 @@ export default function AtelierLanding() {
                     textWrap: 'balance',
                   }}
                 >
-                  Математика долговечного премиум-декора
+                  {t('metrics.heading')}
                 </h2>
               </div>
 
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {METRICS.map((metric) => (
-                  <div
-                    key={metric.label}
-                    className="border-t border-white/15 pt-6"
-                  >
+                {metricsList.map((metric) => (
+                  <div key={metric.label} className="border-t border-white/15 pt-6">
                     <div className="text-4xl font-bold tracking-tight text-white tabular-nums sm:text-5xl">
                       {metric.value}
                     </div>
@@ -642,7 +583,7 @@ export default function AtelierLanding() {
           >
             <div className="mb-14 max-w-2xl">
               <p className="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">
-                Отзывы клиентов
+                {t('reviews.eyebrow')}
               </p>
               <h2
                 className="font-semibold tracking-tight text-white"
@@ -652,12 +593,12 @@ export default function AtelierLanding() {
                   textWrap: 'balance',
                 }}
               >
-                Впечатление, которое работает на ваш бренд каждый день
+                {t('reviews.heading')}
               </h2>
             </div>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-              {REVIEWS.map((review) => (
+              {reviewsList.map((review) => (
                 <blockquote
                   key={review.author}
                   className="flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.025] p-7 sm:p-8"
@@ -687,7 +628,7 @@ export default function AtelierLanding() {
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-14 lg:grid-cols-12 lg:items-start">
               <div className="lg:col-span-5">
                 <p className="mb-3 text-xs tracking-[0.14em] text-[#7ab3e6] uppercase">
-                  Прямая связь с ателье
+                  {t('contact.eyebrow')}
                 </p>
                 <h2
                   className="font-semibold tracking-tight text-white"
@@ -697,15 +638,15 @@ export default function AtelierLanding() {
                     textWrap: 'balance',
                   }}
                 >
-                  Создадим композицию под архитектуру вашего зала
+                  {t('contact.heading')}
                 </h2>
                 <p className="mt-5 text-sm leading-relaxed text-neutral-300 sm:text-base">
-                  Подберём оттенок бутонов под палитру отделки, рассчитаем высоту кашпо для витрины или переговорной и организуем бережную доставку с профессиональной расстановкой.
+                  {t('contact.description')}
                 </p>
 
                 <div className="mt-10 border-t border-white/10 pt-8">
                   <div className="text-xs tracking-[0.12em] text-neutral-400 uppercase">
-                    Телефон для заказа и консультаций
+                    {t('contact.phoneLabel')}
                   </div>
                   <a
                     href="tel:+37378585585"
@@ -715,7 +656,7 @@ export default function AtelierLanding() {
                     <span>+373 785 85 585</span>
                   </a>
                   <p className="mt-3 text-sm text-neutral-400">
-                    Ежедневно с 09:00 до 20:00 · Индивидуальный подбор по фото интерьера
+                    {t('contact.hours')}
                   </p>
                 </div>
               </div>
@@ -727,11 +668,15 @@ export default function AtelierLanding() {
                       <Check className="h-6 w-6" aria-hidden="true" />
                     </div>
                     <h3 className="text-2xl font-semibold text-white">
-                      Заявка принята
+                      {t('contact.form.successTitle')}
                     </h3>
                     <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-neutral-300">
-                      Спасибо, {contactName}. Специалист ателье Pionni del Alevtonni свяжется с вами по телефону{' '}
-                      <span className="font-medium text-white tabular-nums">{contactPhone}</span> в ближайшее время.
+                      {t('contact.form.successPrefix')} {contactName}.{' '}
+                      {t('contact.form.successMiddle')}{' '}
+                      <span className="font-medium text-white tabular-nums">
+                        {contactPhone}
+                      </span>{' '}
+                      {t('contact.form.successSuffix')}
                     </p>
                     <button
                       type="button"
@@ -743,7 +688,7 @@ export default function AtelierLanding() {
                       }}
                       className="mt-8 inline-flex cursor-pointer items-center justify-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-neutral-200 transition-colors hover:bg-white/5"
                     >
-                      Отправить ещё одну заявку
+                      {t('contact.form.reset')}
                     </button>
                   </div>
                 ) : (
@@ -754,14 +699,14 @@ export default function AtelierLanding() {
                           htmlFor="contact-name"
                           className="mb-2 block text-xs font-medium text-neutral-300"
                         >
-                          Ваше имя
+                          {t('contact.form.nameLabel')}
                         </label>
                         <input
                           id="contact-name"
                           type="text"
                           value={contactName}
                           onChange={(e) => setContactName(e.target.value)}
-                          placeholder="Например, Елена"
+                          placeholder={t('contact.form.namePlaceholder')}
                           className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-neutral-500 transition-colors focus:border-[#5b9bd5] focus:outline-none"
                         />
                       </div>
@@ -771,14 +716,14 @@ export default function AtelierLanding() {
                           htmlFor="contact-phone"
                           className="mb-2 block text-xs font-medium text-neutral-300"
                         >
-                          Телефон
+                          {t('contact.form.phoneLabel')}
                         </label>
                         <input
                           id="contact-phone"
                           type="tel"
                           value={contactPhone}
                           onChange={(e) => setContactPhone(e.target.value)}
-                          placeholder="+373 785 85 585"
+                          placeholder={t('contact.form.phonePlaceholder')}
                           className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-neutral-500 tabular-nums transition-colors focus:border-[#5b9bd5] focus:outline-none"
                         />
                       </div>
@@ -789,7 +734,7 @@ export default function AtelierLanding() {
                         htmlFor="contact-space"
                         className="mb-2 block text-xs font-medium text-neutral-300"
                       >
-                        Тип пространства
+                        {t('contact.form.spaceLabel')}
                       </label>
                       <select
                         id="contact-space"
@@ -797,10 +742,10 @@ export default function AtelierLanding() {
                         onChange={(e) => setContactSpace(e.target.value)}
                         className="w-full rounded-lg border border-white/15 bg-[#0f1116] px-4 py-3 text-sm text-white transition-colors focus:border-[#5b9bd5] focus:outline-none"
                       >
-                        <option value="Офис / Ресепшн">Офис / Ресепшн</option>
-                        <option value="Бутик / Магазин">Бутик / Магазин</option>
-                        <option value="Отель / Ресторан">Отель / Ресторан</option>
-                        <option value="Частная резиденция">Частная резиденция</option>
+                        <option value="office">{t('contact.form.spaces.office')}</option>
+                        <option value="boutique">{t('contact.form.spaces.boutique')}</option>
+                        <option value="hotel">{t('contact.form.spaces.hotel')}</option>
+                        <option value="residence">{t('contact.form.spaces.residence')}</option>
                       </select>
                     </div>
 
@@ -809,14 +754,14 @@ export default function AtelierLanding() {
                         htmlFor="contact-comment"
                         className="mb-2 block text-xs font-medium text-neutral-300"
                       >
-                        Пожелания к оттенку и высоте
+                        {t('contact.form.commentLabel')}
                       </label>
                       <textarea
                         id="contact-comment"
                         rows={3}
                         value={contactComment}
                         onChange={(e) => setContactComment(e.target.value)}
-                        placeholder="Опишите интерьер, желаемую палитру или габариты зоны..."
+                        placeholder={t('contact.form.commentPlaceholder')}
                         className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-neutral-500 transition-colors focus:border-[#5b9bd5] focus:outline-none"
                       />
                     </div>
@@ -831,7 +776,7 @@ export default function AtelierLanding() {
                       type="submit"
                       className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#2C5C88] px-6 py-3.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#3a7aad]"
                     >
-                      <span>Запросить подбор композиции</span>
+                      <span>{t('contact.form.submit')}</span>
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </button>
                   </form>
@@ -848,19 +793,19 @@ export default function AtelierLanding() {
                   Pionni del Alevtonni
                 </div>
                 <div className="mt-1 text-xs text-neutral-400">
-                  Ручные пионы из Италии для премиальных интерьеров · 2026
+                  {t('footer.tagline')}
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-6 text-sm text-neutral-300">
                 <a href="#catalog" className="transition-colors hover:text-white">
-                  Коллекции
+                  {t('nav.catalog')}
                 </a>
                 <a href="#metrics" className="transition-colors hover:text-white">
-                  Мастерство
+                  {t('nav.metrics')}
                 </a>
                 <a href="#reviews" className="transition-colors hover:text-white">
-                  Отзывы
+                  {t('nav.reviews')}
                 </a>
                 <a
                   href="tel:+37378585585"
@@ -890,7 +835,7 @@ export default function AtelierLanding() {
             <button
               type="button"
               onClick={() => setModalOpen(false)}
-              aria-label="Закрыть окно заказа"
+              aria-label={t('modal.closeAria')}
               className="absolute top-5 right-5 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-white/10 text-neutral-400 transition-colors hover:bg-white/5 hover:text-white"
             >
               <X className="h-4 w-4" />
@@ -902,30 +847,33 @@ export default function AtelierLanding() {
                   <Sparkles className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <h3 id="order-modal-title" className="text-xl font-semibold text-white">
-                  Заказ на «{selectedCollection}» оформлен
+                  {t('modal.successTitlePrefix')}
+                  {selectedCollection}
+                  {t('modal.successTitleSuffix')}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-300">
-                  Наш флорист-декоратор позвонит вам на номер{' '}
-                  <span className="font-medium text-white tabular-nums">{modalPhone}</span> для уточнения деталей вазы и времени доставки.
+                  {t('modal.successMiddle')}{' '}
+                  <span className="font-medium text-white tabular-nums">{modalPhone}</span>{' '}
+                  {t('modal.successSuffix')}
                 </p>
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
                   className="mt-6 inline-flex cursor-pointer items-center justify-center rounded-lg bg-[#2C5C88] px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#3a7aad]"
                 >
-                  Вернуться на сайт
+                  {t('modal.back')}
                 </button>
               </div>
             ) : (
               <>
                 <p className="text-xs tracking-[0.12em] text-[#7ab3e6] uppercase">
-                  Персональный заказ
+                  {t('modal.eyebrow')}
                 </p>
                 <h3 id="order-modal-title" className="mt-2 text-2xl font-semibold text-white">
                   {selectedCollection}
                 </h3>
                 <p className="mt-2 text-sm text-neutral-400">
-                  Оставьте контакты, либо позвоните напрямую по номеру{' '}
+                  {t('modal.subtitlePrefix')}{' '}
                   <a
                     href="tel:+37378585585"
                     className="text-neutral-200 underline decoration-[#2C5C88] underline-offset-4 tabular-nums"
@@ -941,14 +889,14 @@ export default function AtelierLanding() {
                       htmlFor="modal-name"
                       className="mb-1.5 block text-xs font-medium text-neutral-300"
                     >
-                      Ваше имя
+                      {t('modal.nameLabel')}
                     </label>
                     <input
                       id="modal-name"
                       type="text"
                       value={modalName}
                       onChange={(e) => setModalName(e.target.value)}
-                      placeholder="Ваше имя"
+                      placeholder={t('modal.namePlaceholder')}
                       className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:border-[#5b9bd5] focus:outline-none"
                     />
                   </div>
@@ -958,14 +906,14 @@ export default function AtelierLanding() {
                       htmlFor="modal-phone"
                       className="mb-1.5 block text-xs font-medium text-neutral-300"
                     >
-                      Номер телефона
+                      {t('modal.phoneLabel')}
                     </label>
                     <input
                       id="modal-phone"
                       type="tel"
                       value={modalPhone}
                       onChange={(e) => setModalPhone(e.target.value)}
-                      placeholder="+373 785 85 585"
+                      placeholder={t('modal.phonePlaceholder')}
                       className="w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder-neutral-500 tabular-nums focus:border-[#5b9bd5] focus:outline-none"
                     />
                   </div>
@@ -975,7 +923,7 @@ export default function AtelierLanding() {
                       htmlFor="modal-space"
                       className="mb-1.5 block text-xs font-medium text-neutral-300"
                     >
-                      Пространство
+                      {t('modal.spaceLabel')}
                     </label>
                     <select
                       id="modal-space"
@@ -983,10 +931,10 @@ export default function AtelierLanding() {
                       onChange={(e) => setModalSpace(e.target.value)}
                       className="w-full rounded-lg border border-white/15 bg-[#0f1116] px-4 py-2.5 text-sm text-white focus:border-[#5b9bd5] focus:outline-none"
                     >
-                      <option value="Бутик / Магазин">Бутик / Магазин</option>
-                      <option value="Офис / Ресепшн">Офис / Ресепшн</option>
-                      <option value="Отель / Ресторан">Отель / Ресторан</option>
-                      <option value="Частный интерьер">Частный интерьер</option>
+                      <option value="boutique">{t('modal.spaces.boutique')}</option>
+                      <option value="office">{t('modal.spaces.office')}</option>
+                      <option value="hotel">{t('modal.spaces.hotel')}</option>
+                      <option value="residence">{t('modal.spaces.residence')}</option>
                     </select>
                   </div>
 
@@ -1000,7 +948,7 @@ export default function AtelierLanding() {
                     type="submit"
                     className="mt-2 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#2C5C88] px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#3a7aad]"
                   >
-                    <span>Подтвердить заявку</span>
+                    <span>{t('modal.submit')}</span>
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </form>
